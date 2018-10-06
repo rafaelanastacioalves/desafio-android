@@ -23,14 +23,33 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<FrameLayout android:id="@+id/package_detail_fragment_container"
-	             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-	             android:layout_width="match_parent"
-	             android:layout_height="match_parent"
-	             tools:context=".pulllisting.PullRequestsActivity"
-	             xmlns:android="http://schemas.android.com/apk/res/android"
-	             xmlns:app="http://schemas.android.com/apk/res-auto"
-	             xmlns:tools="http://schemas.android.com/tools" />
+
+	<FrameLayout
+		android:id="@+id/package_detail_container"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".pulllisting.PullRequestsActivity"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		>
+		<TextView
+			android:id="@+id/empty_list_textview"
+			android:text="@string/no_pull_requests"
+			style="@style/AppTheme"
+			android:layout_margin="@dimen/default_material_screen_edge_margin"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/pulls_list_recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:scrollbars="vertical"
+			tools:listitem="@layout/pull_viewholder"
+			/>
+
+	</FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
 

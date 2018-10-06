@@ -1,40 +1,68 @@
 package com.example.rafaelanastacioalves.moby.pulllisting;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.rafaelanastacioalves.moby.R;
+import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
+import com.example.rafaelanastacioalves.moby.vo.Pull;
 
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
-public class PullRequestsActivity extends AppCompatActivity {
+
+public class PullRequestsActivity extends AppCompatActivity implements RecyclerViewClickListener {
+
+
+    public static String ARG_PACKAGE_ID;
+    public static final String ARG_CREATOR = "creator_arg";
+    public static final String ARG_REPOSITORY = "repository_arg";
+
+    private LiveDataEntityDetailsViewModel mLiveDataEntityDetailsViewModel;
+    private final RecyclerViewClickListener clickListener = this;
+    @BindView(R.id.pulls_list_recycler_view)
+    RecyclerView mPullsListRecyclerView;
+    private PullsListAdapter mPullsListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupView();
+        subscribe();
+        loadData();
+    }
+
+    private void setupView() {
         setContentView(R.layout.pull_request_activity);
+        ButterKnife.bind(this);
         setupActionBar();
+        setupRecyclerView(mPullsListRecyclerView);
 
 
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Timber.i("PullRequestsFragment ARG PACKAGE: " + getIntent().getStringExtra(PullRequestsFragment.ARG_PACKAGE_ID));
-            Bundle arguments = new Bundle();
-            arguments.putString(PullRequestsFragment.ARG_CREATOR,
-                    getIntent().getStringExtra(PullRequestsFragment.ARG_CREATOR));
+    }
 
-            Timber.i("PullRequestsFragment ARG REPOSITORY: " + getIntent().getStringExtra(PullRequestsFragment.ARG_REPOSITORY));
-            arguments.putString(PullRequestsFragment.ARG_REPOSITORY,
-                    getIntent().getStringExtra(PullRequestsFragment.ARG_REPOSITORY));
-            PullRequestsFragment fragment = new PullRequestsFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.package_detail_fragment_container, fragment)
-                    .commit();
+    private void setupRecyclerView(RecyclerView mPullsListRecyclerView) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mPullsListRecyclerView.setLayoutManager(layoutManager);
+        if (mPullsListAdapter == null) {
+            mPullsListAdapter = new PullsListAdapter(getContext());
         }
+        mPullsListAdapter.setRecyclerViewClickListener(clickListener);
+        mPullsListRecyclerView.setAdapter(mPullsListAdapter);
     }
 
     private void setupActionBar() {
@@ -42,5 +70,38 @@ public class PullRequestsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
     }
+
+    @Override
+    public void onClick(View view, int position) {
+        Pull aPull = (Pull) view.getTag();
+        Timber.i("Url: " + Uri.parse(aPull.getPullUrl()));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(aPull.getPullUrl()));
+        startActivity(browserIntent);
+    }
+
+    private void loadData() {
+        String mCreatorString = getIntent().getStringExtra(ARG_CREATOR);
+        String mRepositoryString = getIntent().getStringExtra(ARG_REPOSITORY);
+        mLiveDataEntityDetailsViewModel.loadData(mCreatorString,mRepositoryString);
+    }
+
+    private void subscribe() {
+        mLiveDataEntityDetailsViewModel = ViewModelProviders.of(this).get(LiveDataEntityDetailsViewModel.class);
+        mLiveDataEntityDetailsViewModel.getEntityDetails().observe(this, new Observer<ArrayList<Pull>>() {
+            @Override
+            public void onChanged(@Nullable ArrayList<Pull> pull) {
+                setViewsWith(pull);
+            }
+        });
+
+    }
+
+    private void setViewsWith(ArrayList<Pull> pull) {
+        mPullsListAdapter.setItems(pull);
+    }
+
+
+
+
 
 }
