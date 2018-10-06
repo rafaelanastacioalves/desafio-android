@@ -1,10 +1,10 @@
 package com.example.rafaelanastacioalves.moby.pulllisting;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rafaelanastacioalves.moby.R;
@@ -28,8 +28,8 @@ class PullViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     private final RecyclerViewClickListener aRecyclerViewListener;
 
-    @BindView(R.id.pull_linear_layout_container)
-    LinearLayout pullLinearLayoutContainer;
+    @BindView(R.id.pull_container)
+    ConstraintLayout pullLinearLayoutContainer;
 
     @BindView(R.id.pull_textview_owner_photo)
     ImageView circularImageView;

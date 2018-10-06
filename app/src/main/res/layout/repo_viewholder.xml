@@ -1,135 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/repo_linear_layout_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background_material_light"
-    android:orientation="vertical"
     tools:ignore="PrivateResource">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/repo_text_view_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:padding="@dimen/default_material_screen_edge_margin">
+        android:layout_marginStart="@dimen/default_material_screen_edge_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/color_blue_bold"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/repo_linear_layout_item"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.65"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/repo_text_view_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_material_screen_edge_margin"
+        android:layout_marginLeft="@dimen/default_material_screen_edge_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="@dimen/default_margin"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repo_text_view_title"
+        tools:ignore="InefficientWeight"
+        tools:text="@string/fake_description_text" />
 
-            <TextView
-                android:id="@+id/repo_text_view_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/color_blue_bold"
-                android:textStyle="bold" />
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/repo_imageview_forks"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:tint="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/repo_text_view_title"
+        app:layout_constraintTop_toBottomOf="@+id/repo_text_view_description"
+        app:srcCompat="@drawable/git_icon_forks_black"
+        tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/repo_text_view_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/default_margin"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="normal"
-                tools:ignore="InefficientWeight"
-                tools:text="@string/fake_description_text" />
+    <TextView
+        android:id="@+id/repo_textview_number_forks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/between_items_margin"
+        android:layout_marginLeft="@dimen/between_items_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:text="@string/blank_value"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/repo_imageview_forks"
+        app:layout_constraintTop_toBottomOf="@+id/repo_text_view_description"
+        tools:text="100" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/repo_imageview_stars"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/default_internal_margin"
+        android:layout_marginLeft="@dimen/default_internal_margin"
+        android:tint="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/repo_textview_number_forks"
+        app:layout_constraintTop_toTopOf="@+id/repo_imageview_forks"
+        app:srcCompat="@drawable/git_icon_star_black"
+        tools:ignore="ContentDescription" />
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/repo_imageview_forks"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/git_icon_forks_black"
-                    android:tint="@color/colorAccent"
-                    tools:ignore="ContentDescription" />
+    <TextView
+        android:id="@+id/repo_textview_number_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/between_items_margin"
+        android:layout_marginLeft="@dimen/between_items_margin"
+        android:text="@string/blank_value"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/repo_imageview_stars"
+        app:layout_constraintTop_toTopOf="@+id/repo_textview_number_forks"
+        tools:text="100" />
 
-                <TextView
-                    android:id="@+id/repo_textview_number_forks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/between_items_margin"
-                    android:layout_marginLeft="@dimen/between_items_margin"
-                    android:text="@string/blank_value"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
-                    tools:text="100"
-                     />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/repo_owner_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:src="@drawable/placeholder_user"
+        app:layout_constraintBottom_toTopOf="@+id/repo_textview_owner_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:mockup="@drawable/placeholder_user" />
 
-                <ImageView
-                    android:id="@+id/repo_imageview_stars"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/default_internal_margin"
-                    android:layout_marginStart="@dimen/default_internal_margin"
-                    app:srcCompat="@drawable/git_icon_star_black"
-                    android:tint="@color/colorAccent"
-                    tools:ignore="ContentDescription" />
+    <TextView
+        android:id="@+id/repo_textview_owner_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_internal_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:ellipsize="end"
+        android:maxLength="22"
+        android:text="@string/small_text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/color_blue_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/repo_text_view_description" />
 
-                <TextView
-                    android:id="@+id/repo_textview_number_stars"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/between_items_margin"
-                    android:layout_marginStart="@dimen/between_items_margin"
-                    android:text="@string/blank_value"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
-                    tools:text="100" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70" />
 
-            </LinearLayout>
+    <include
+        layout="@layout/view_divider_horizontal"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="0.35"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/repo_owner_photo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/placeholder_user"
-                tools:mockup="@drawable/placeholder_user" />
-
-            <TextView
-                android:id="@+id/repo_textview_owner_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLength="22"
-                android:text="@string/small_text"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/color_blue_light"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <include layout="@layout/view_divider_horizontal" />
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

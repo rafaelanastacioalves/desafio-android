@@ -1,6 +1,5 @@
 package com.example.rafaelanastacioalves.moby;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.rafaelanastacioalves.moby.R;
 import com.example.rafaelanastacioalves.moby.database.AppDatabase;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsActivity;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsFragment;
@@ -129,7 +127,7 @@ public class PullMockedListTest {
         Intents.init();
 
 
-        onView(allOf(withId(R.id.pull_linear_layout_container), withContentDescription("Pull Request number " + 1))).perform(click());
+        onView(allOf(withId(R.id.pull_container), withContentDescription("Pull Request number " + 1))).perform(click());
         intended(anyOf(
                 hasAction(Intent.ACTION_VIEW),
                 hasData(Uri.parse(urlString)))

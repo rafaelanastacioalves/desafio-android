@@ -1,76 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_material_light"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pull_linear_layout_container"
+    android:id="@+id/pull_container"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="PrivateResource">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/pull_textview_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_material_screen_edge_margin">
+        android:layout_marginStart="@dimen/default_material_screen_edge_margin"
+        android:layout_marginLeft="@dimen/default_material_screen_edge_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_material_screen_edge_margin"
+        android:layout_marginRight="@dimen/default_material_screen_edge_margin"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/color_blue_bold"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_blue_bold"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/pull_textview_title" />
+    <TextView
 
-        <TextView
+        android:id="@+id/pull_text_view_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_material_screen_edge_margin"
+        android:layout_marginLeft="@dimen/default_material_screen_edge_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/default_material_screen_edge_margin"
+        android:layout_weight="0.85"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pull_textview_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="InefficientWeight"
+        tools:text="@string/fake_description_text" />
 
-            android:id="@+id/pull_text_view_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            tools:text="@string/fake_description_text"
-            android:layout_weight="0.85"
-            android:ellipsize="end"
-            android:maxLines="2"
-            tools:ignore="InefficientWeight" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/pull_textview_owner_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/default_material_screen_edge_margin"
+        android:layout_marginLeft="@dimen/default_material_screen_edge_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pull_text_view_description" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/pull_textview_owner_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_internal_margin"
+        android:layout_marginLeft="@dimen/default_internal_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:ellipsize="end"
+        android:maxLength="22"
+        android:text="@string/small_text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/color_blue_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pull_textview_owner_photo"
+        app:layout_constraintTop_toBottomOf="@+id/pull_text_view_description" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/pull_textview_owner_photo" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/color_blue_light"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:text="@string/small_text"
-                    android:ellipsize="end"
-                    android:maxLength="22"
-                    android:id="@+id/pull_textview_owner_username"
-                    />
-
-            </LinearLayout>
-
-        </LinearLayout>
+    <include
+        android:id="@+id/include"
+        layout="@layout/view_divider_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-    </LinearLayout>
-    <include layout="@layout/view_divider_horizontal"/>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.rafaelanastacioalves.moby.repolisting;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +19,7 @@ public class RepoViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
     @BindView(R.id.repo_linear_layout_container)
-    LinearLayout containerLinearLayout;
+    ConstraintLayout containerLinearLayout;
     private RecyclerViewClickListener aRecyclerViewListener;
     @BindView(R.id.repo_owner_photo)
     ImageView reopOwnerImageView;
