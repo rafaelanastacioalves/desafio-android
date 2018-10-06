@@ -49,20 +49,33 @@ public class Repo extends BaseModel {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getForks() {
         return forks;
+    }
+
+    public void setForks(int forks) {
+        this.forks = forks;
     }
 
     public GitHubUser getOwner() {
         return owner;
     }
 
-
+    public void setOwner(RepoOwner owner) {
+        this.owner = owner;
+    }
 
     public int getId() {
         return id;
@@ -70,22 +83,6 @@ public class Repo extends BaseModel {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setForks(int forks) {
-        this.forks = forks;
-    }
-
-    public void setOwner(RepoOwner owner) {
-        this.owner = owner;
     }
 
     public String getPullsUrl() {

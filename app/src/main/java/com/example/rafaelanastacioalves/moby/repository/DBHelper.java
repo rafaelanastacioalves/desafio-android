@@ -47,7 +47,7 @@ public class DBHelper {
 
     public static void setPullListForRepo(String creator, String repoName, ArrayList<Pull> pullList) {
 
-        for (int i =0; i < pullList.size(); i++) {
+        for (int i = 0; i < pullList.size(); i++) {
             Pull pull = pullList.get(i);
             pull.setOrder(i);
             pull.setCreator(creator);
@@ -55,7 +55,6 @@ public class DBHelper {
             pull.save();
 
         }
-
 
 
     }
@@ -73,7 +72,7 @@ public class DBHelper {
             return null;
         }
 
-        return  (ArrayList<Pull>) listPull;
+        return (ArrayList<Pull>) listPull;
     }
 
 }

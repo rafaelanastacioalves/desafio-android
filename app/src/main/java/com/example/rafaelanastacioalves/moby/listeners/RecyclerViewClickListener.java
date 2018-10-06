@@ -2,6 +2,7 @@ package com.example.rafaelanastacioalves.moby.listeners;
 
 
 import android.view.View;
+
 public interface RecyclerViewClickListener {
 
     /**

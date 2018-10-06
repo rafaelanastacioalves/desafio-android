@@ -52,18 +52,32 @@ public class Pull extends BaseModel implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getBody() {
         return body;
     }
 
+    public void setBody(String body) {
+        this.body = body;
+    }
 
     public PullUser getPullUser() {
         return pullUser;
     }
 
+    public void setPullUser(PullUser pullUser) {
+        this.pullUser = pullUser;
+    }
+
     public String getPullUrl() {
         return pullUrl;
+    }
+
+    public void setPullUrl(String pullUrl) {
+        this.pullUrl = pullUrl;
     }
 
     public String getCreator() {
@@ -89,23 +103,6 @@ public class Pull extends BaseModel implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPullUser(PullUser pullUser) {
-        this.pullUser = pullUser;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public void setPullUrl(String pullUrl) {
-        this.pullUrl = pullUrl;
-    }
-
 
     public int getOrder() {
         return order;

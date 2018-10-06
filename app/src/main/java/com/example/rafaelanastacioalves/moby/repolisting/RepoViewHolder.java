@@ -4,12 +4,11 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rafaelanastacioalves.moby.R;
-import com.example.rafaelanastacioalves.moby.vo.Repo;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
+import com.example.rafaelanastacioalves.moby.vo.Repo;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -20,7 +19,6 @@ public class RepoViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @BindView(R.id.repo_linear_layout_container)
     ConstraintLayout containerLinearLayout;
-    private RecyclerViewClickListener aRecyclerViewListener;
     @BindView(R.id.repo_owner_photo)
     ImageView reopOwnerImageView;
     @BindView(R.id.repo_text_view_title)
@@ -33,6 +31,7 @@ public class RepoViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     TextView numberStarsTextView;
     @BindView(R.id.repo_textview_owner_name)
     TextView ownerNameTextView;
+    private RecyclerViewClickListener aRecyclerViewListener;
 
 
     public RepoViewHolder(View itemView, RecyclerViewClickListener clickListener) {

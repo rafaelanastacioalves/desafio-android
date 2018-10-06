@@ -30,12 +30,16 @@ public class GitHubUser extends BaseModel implements Serializable {
         return login;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getAvatarUrl() {
         return avatarUrl;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public int getId() {
@@ -44,10 +48,6 @@ public class GitHubUser extends BaseModel implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public String getPictureStringData() {

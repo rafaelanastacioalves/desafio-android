@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.rafaelanastacioalves.moby.R;
-import com.example.rafaelanastacioalves.moby.vo.Pull;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
+import com.example.rafaelanastacioalves.moby.vo.Pull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +49,10 @@ class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (getItems() != null){
+        if (getItems() != null) {
             return this.items.size();
 
-        }else{
+        } else {
             return 0;
         }
     }

@@ -28,14 +28,13 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 public class PullRequestsActivity extends AppCompatActivity implements RecyclerViewClickListener {
 
 
-    public static String ARG_PACKAGE_ID;
     public static final String ARG_CREATOR = "creator_arg";
     public static final String ARG_REPOSITORY = "repository_arg";
-
-    private LiveDataEntityDetailsViewModel mLiveDataEntityDetailsViewModel;
+    public static String ARG_PACKAGE_ID;
     private final RecyclerViewClickListener clickListener = this;
     @BindView(R.id.pulls_list_recycler_view)
     RecyclerView mPullsListRecyclerView;
+    private LiveDataEntityDetailsViewModel mLiveDataEntityDetailsViewModel;
     private PullsListAdapter mPullsListAdapter;
 
     @Override
@@ -82,7 +81,7 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
     private void loadData() {
         String mCreatorString = getIntent().getStringExtra(ARG_CREATOR);
         String mRepositoryString = getIntent().getStringExtra(ARG_REPOSITORY);
-        mLiveDataEntityDetailsViewModel.loadData(mCreatorString,mRepositoryString);
+        mLiveDataEntityDetailsViewModel.loadData(mCreatorString, mRepositoryString);
     }
 
     private void subscribe() {
@@ -99,9 +98,6 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
     private void setViewsWith(ArrayList<Pull> pull) {
         mPullsListAdapter.setItems(pull);
     }
-
-
-
 
 
 }

@@ -3,8 +3,8 @@ package com.example.rafaelanastacioalves.moby.pulllisting;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.rafaelanastacioalves.moby.vo.Pull;
 import com.example.rafaelanastacioalves.moby.repository.GitHubRepository;
+import com.example.rafaelanastacioalves.moby.vo.Pull;
 
 import java.util.ArrayList;
 

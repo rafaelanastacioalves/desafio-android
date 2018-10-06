@@ -51,10 +51,10 @@ public class ServiceGenerator {
     }
 
 
-    public static OkHttpClient mountOkhttpClientByVersion(Interceptor interceptor){
+    public static OkHttpClient mountOkhttpClientByVersion(Interceptor interceptor) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        if(interceptor!=null){
+        if (interceptor != null) {
             httpClient.addInterceptor(interceptor);
         }
 
@@ -62,7 +62,7 @@ public class ServiceGenerator {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH) {
             ConnectionSpec spec = new
                     ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-                    .tlsVersions(TlsVersion.TLS_1_1,TlsVersion.TLS_1_2)
+                    .tlsVersions(TlsVersion.TLS_1_1, TlsVersion.TLS_1_2)
                     .cipherSuites(
                             CipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA,
                             CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,

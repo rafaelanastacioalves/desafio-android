@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rafaelanastacioalves.moby.R;
-import com.example.rafaelanastacioalves.moby.vo.Pull;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
+import com.example.rafaelanastacioalves.moby.vo.Pull;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -17,17 +17,13 @@ import butterknife.ButterKnife;
 
 class PullViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    private final RecyclerViewClickListener aRecyclerViewListener;
     @BindView(R.id.pull_text_view_description)
     TextView pullTextViewDescription;
-
     @BindView(R.id.pull_textview_title)
     TextView pullTextViewTitle;
-
     @BindView(R.id.pull_textview_owner_username)
     TextView pullTexViewUserName;
-
-    private final RecyclerViewClickListener aRecyclerViewListener;
-
     @BindView(R.id.pull_container)
     ConstraintLayout pullLinearLayoutContainer;
 

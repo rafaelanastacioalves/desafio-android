@@ -1,10 +1,10 @@
 package com.example.rafaelanastacioalves.moby.repository;
 
+import com.example.rafaelanastacioalves.moby.api.APIClient;
+import com.example.rafaelanastacioalves.moby.api.ServiceGenerator;
 import com.example.rafaelanastacioalves.moby.vo.Pull;
 import com.example.rafaelanastacioalves.moby.vo.Repo;
 import com.example.rafaelanastacioalves.moby.vo.RepoContainer;
-import com.example.rafaelanastacioalves.moby.api.APIClient;
-import com.example.rafaelanastacioalves.moby.api.ServiceGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,43 +33,43 @@ public class GitHubRepository {
             }
 
             // not cached...
-                APIClient apiClient = ServiceGenerator.createService(APIClient.class);
-                Call<RepoContainer> retrofitCall = apiClient.getRepos("language:" + gitRepoLanguage,
-                        gitSortParam,
-                        page
-                );
+            APIClient apiClient = ServiceGenerator.createService(APIClient.class);
+            Call<RepoContainer> retrofitCall = apiClient.getRepos("language:" + gitRepoLanguage,
+                    gitSortParam,
+                    page
+            );
 
-                retrofitCall.enqueue(new Callback<RepoContainer>() {
-                    @Override
-                    public void onResponse(Call<RepoContainer> call, Response<RepoContainer> response) {
-                        if (response.isSuccessful()) {
-                            RepoContainer repoContainer = response.body();
-                            DBHelper.setRepoContainerOfPage(String.valueOf(page), repoContainer);
+            retrofitCall.enqueue(new Callback<RepoContainer>() {
+                @Override
+                public void onResponse(Call<RepoContainer> call, Response<RepoContainer> response) {
+                    if (response.isSuccessful()) {
+                        RepoContainer repoContainer = response.body();
+                        DBHelper.setRepoContainerOfPage(String.valueOf(page), repoContainer);
 
-                            // here we get again from DB as we obey the "single source of truth" approach
-                            RepoContainer finalRepoContainerFromDB = DBHelper.getRepoContainerOfPage(page);
-                            emitter.onSuccess(finalRepoContainerFromDB.getRepoList());
+                        // here we get again from DB as we obey the "single source of truth" approach
+                        RepoContainer finalRepoContainerFromDB = DBHelper.getRepoContainerOfPage(page);
+                        emitter.onSuccess(finalRepoContainerFromDB.getRepoList());
 
-                        } else {
+                    } else {
 
-                            //we emmit 4xx and 5xx error messages
-                            try {
-                                String errorString = response.errorBody().string();
-                                emitter.onError(new Exception(errorString));
-                            } catch (IOException e) {
-                                emitter.onError(e.getCause());
-                                e.printStackTrace();
-                            }
+                        //we emmit 4xx and 5xx error messages
+                        try {
+                            String errorString = response.errorBody().string();
+                            emitter.onError(new Exception(errorString));
+                        } catch (IOException e) {
+                            emitter.onError(e.getCause());
+                            e.printStackTrace();
                         }
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<RepoContainer> call, Throwable t) {
+                @Override
+                public void onFailure(Call<RepoContainer> call, Throwable t) {
 
-                        // IO error cases
-                        emitter.onError(t);
-                    }
-                });
+                    // IO error cases
+                    emitter.onError(t);
+                }
+            });
 
 
         });

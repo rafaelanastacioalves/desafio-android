@@ -14,10 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.rafaelanastacioalves.moby.R;
-import com.example.rafaelanastacioalves.moby.vo.Repo;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsActivity;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsFragment;
+import com.example.rafaelanastacioalves.moby.vo.Repo;
 
 import timber.log.Timber;
 
@@ -27,7 +27,8 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     private RecyclerView mRecyclerView;
     private LiveDataRepoListViewModel mLiveDataRepoListViewModel;
 
-    @Nullable private SimpleIdlingResource mIdlingResource;
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     }
 
     private void tellTestingLoadIsDone(boolean b) {
-        if (getIdlingResource() != null){
+        if (getIdlingResource() != null) {
             mIdlingResource.setIdleState(b);
         }
     }
@@ -79,7 +80,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
 
 
     private void populateRecyclerView(PagedList<Repo> data) {
-       mRepoListAdapter.submitList(data);
+        mRepoListAdapter.submitList(data);
 
     }
 
