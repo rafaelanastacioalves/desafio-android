@@ -13,9 +13,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class LiveDataEntityDetailsViewModel extends ViewModel {
+class LiveDataEntityDetailsViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<Pull>> mPullList = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Pull>> mPullList = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<Pull>> getEntityDetails() {
         return mPullList;
@@ -29,9 +29,7 @@ public class LiveDataEntityDetailsViewModel extends ViewModel {
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> {
-                            mPullList.setValue(response);
-                        },
+                .subscribe(mPullList::setValue,
                         throwable -> throwable.printStackTrace());
 
     }

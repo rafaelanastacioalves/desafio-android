@@ -11,7 +11,7 @@ public class DataSourceFactory extends DataSource.Factory<String, Repo> {
     private final String gitRepoLanguage;
     private final String gitSortParam;
 
-    private MutableLiveData<PagedRepoDataSource> sourceLiveData = new MutableLiveData<PagedRepoDataSource>();
+    private final MutableLiveData<PagedRepoDataSource> sourceLiveData = new MutableLiveData<>();
 
     public DataSourceFactory(String gitRepoLanguage, String gitSortParam) {
         this.gitRepoLanguage = gitRepoLanguage;

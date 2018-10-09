@@ -1,6 +1,7 @@
 package com.example.rafaelanastacioalves.moby.pulllisting;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
     private final Context mContext;
     private RecyclerViewClickListener recyclerViewClickListener;
     private List<Pull> items = new ArrayList<>();
-    private RecyclerViewClickListener clickListener;
 
     public PullsListAdapter(Context context) {
         mContext = context;
@@ -35,6 +35,7 @@ class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
         this.recyclerViewClickListener = aRVC;
     }
 
+    @NonNull
     @Override
     public PullViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new PullViewHolder(LayoutInflater.from(parent.getContext())
@@ -44,7 +45,7 @@ class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
     @Override
     public void onBindViewHolder(PullViewHolder holder, int position) {
         Pull aPull = getItems().get(position);
-        (holder).bind(aPull, mContext);
+        (holder).bind(aPull);
     }
 
     @Override

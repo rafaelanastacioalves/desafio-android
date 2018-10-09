@@ -1,6 +1,7 @@
 package com.example.rafaelanastacioalves.moby.application;
 
-public class FakeCrashLibrary {
+@SuppressWarnings("ALL")
+class FakeCrashLibrary {
     //TODO Think production ready
     private FakeCrashLibrary() {
         throw new AssertionError("No instances.");

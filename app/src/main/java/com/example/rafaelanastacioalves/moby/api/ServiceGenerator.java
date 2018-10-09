@@ -1,5 +1,6 @@
 package com.example.rafaelanastacioalves.moby.api;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 
 import com.example.rafaelanastacioalves.moby.BuildConfig;
@@ -7,9 +8,8 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.Arrays;
+import java.util.Collections;
 
 import javax.net.ssl.X509TrustManager;
 
@@ -46,12 +46,11 @@ public class ServiceGenerator {
     }
 
     private static Retrofit mountRetrofit(Retrofit.Builder builder, OkHttpClient httpClient) {
-        Retrofit retrofit = builder.client(httpClient).build();
-        return retrofit;
+        return builder.client(httpClient).build();
     }
 
 
-    public static OkHttpClient mountOkhttpClientByVersion(Interceptor interceptor) {
+    private static OkHttpClient mountOkhttpClientByVersion(Interceptor interceptor) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         if (interceptor != null) {
@@ -79,18 +78,19 @@ public class ServiceGenerator {
                             CipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
                     .build();
             httpClient
-                    .connectionSpecs(Arrays.asList(spec));
+                    .connectionSpecs(Collections.singletonList(spec));
 
 
             try {
                 httpClient.sslSocketFactory(new MyTLSSocketFactory(), new X509TrustManager() {
+                    @SuppressLint("TrustAllX509TrustManager")
                     @Override
-                    public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+                    public void checkClientTrusted(X509Certificate[] x509Certificates, String s) {
 
                     }
 
                     @Override
-                    public void checkServerTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+                    public void checkServerTrusted(X509Certificate[] x509Certificates, String s) {
 
                     }
 

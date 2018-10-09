@@ -7,24 +7,27 @@ import android.arch.paging.PagedList;
 import android.support.annotation.NonNull;
 
 import com.example.rafaelanastacioalves.moby.repository.DataSourceFactory;
+import com.example.rafaelanastacioalves.moby.repository.PagedRepoDataSource;
 import com.example.rafaelanastacioalves.moby.vo.Repo;
 
 import java.util.concurrent.Executors;
 
 import static android.arch.lifecycle.Transformations.switchMap;
 
-public class LiveDataRepoListViewModel extends ViewModel {
+class LiveDataRepoListViewModel extends ViewModel {
 
     private LiveData<Boolean> mIsLoading;
-    private LiveData<PagedList<Repo>> mMainEntityPagedList = setupPagedList();
+    private final LiveData<PagedList<Repo>> mMainEntityPagedList = setupPagedList();
 
     @NonNull
-    private LiveData setupPagedList() {
+    private LiveData<PagedList<Repo>> setupPagedList() {
 
         DataSourceFactory dataSourceFactory = new DataSourceFactory("Java", "start");
-        mIsLoading = switchMap(dataSourceFactory.getDataSource(), input -> input.getLiveLoadStatus());
+        mIsLoading = switchMap(dataSourceFactory.getDataSource(), PagedRepoDataSource::getLiveLoadStatus);
 
-        return new LivePagedListBuilder(dataSourceFactory, 10)
+        LivePagedListBuilder<String, Repo> mLivePagedListBuilder =  new LivePagedListBuilder<>(dataSourceFactory, 10);
+
+        return mLivePagedListBuilder
                 .setFetchExecutor(Executors.newFixedThreadPool(5))
                 .build();
     }

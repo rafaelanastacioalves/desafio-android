@@ -10,6 +10,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -18,7 +19,7 @@ public class PagedRepoDataSource extends PageKeyedDataSource<String, Repo> {
 
     private final String gitRepoLanguage;
     private final String gitSortParam;
-    private MutableLiveData<Boolean> loadStatus = new MutableLiveData<Boolean>();
+    private final MutableLiveData<Boolean> loadStatus = new MutableLiveData<>();
 
     public PagedRepoDataSource(String gitRepoLanguage, String gitSortParam) {
         this.gitRepoLanguage = gitRepoLanguage;
@@ -31,7 +32,7 @@ public class PagedRepoDataSource extends PageKeyedDataSource<String, Repo> {
         loadStatus.postValue(Boolean.TRUE);
         GitHubRepository repository = new GitHubRepository();
         Single<List<Repo>> observable = repository.getRepoList(String.valueOf(1), gitRepoLanguage, gitSortParam);
-        observable.subscribeOn(Schedulers.computation())
+        Disposable disposable = observable.subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repoList -> {
                             loadStatus.setValue(Boolean.FALSE);
@@ -60,7 +61,7 @@ public class PagedRepoDataSource extends PageKeyedDataSource<String, Repo> {
         loadStatus.postValue(Boolean.TRUE);
         GitHubRepository repository = new GitHubRepository();
         Single<List<Repo>> observable = repository.getRepoList(String.valueOf(params.key), gitRepoLanguage, gitSortParam);
-        observable.subscribeOn(Schedulers.computation())
+        Disposable disposable = observable.subscribeOn(Schedulers.computation())
 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repoList -> {

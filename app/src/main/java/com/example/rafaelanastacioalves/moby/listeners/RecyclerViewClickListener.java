@@ -12,5 +12,5 @@ public interface RecyclerViewClickListener {
      * @param view     The view within the RecyclerView.Adapter
      * @param position The position of the view in the adapter
      */
-    public void onClick(View view, int position);
+    void onClick(View view, int position);
 }

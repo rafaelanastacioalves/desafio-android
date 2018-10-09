@@ -1,6 +1,5 @@
 package com.example.rafaelanastacioalves.moby.pulllisting;
 
-import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -39,7 +38,7 @@ class PullViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         pullLinearLayoutContainer.setOnClickListener(this);
     }
 
-    public void bind(Pull aPull, Context context) {
+    public void bind(Pull aPull) {
         pullTextViewDescription.setText(aPull.getBody());
         pullLinearLayoutContainer.setContentDescription("Pull Request number " + (getAdapterPosition() + 1));
 

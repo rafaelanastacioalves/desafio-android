@@ -31,7 +31,7 @@ public class RepoViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     TextView numberStarsTextView;
     @BindView(R.id.repo_textview_owner_name)
     TextView ownerNameTextView;
-    private RecyclerViewClickListener aRecyclerViewListener;
+    private final RecyclerViewClickListener aRecyclerViewListener;
 
 
     public RepoViewHolder(View itemView, RecyclerViewClickListener clickListener) {

@@ -9,6 +9,7 @@ import com.example.rafaelanastacioalves.moby.vo.RepoContainer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.Single;
 import retrofit2.Call;
@@ -48,7 +49,7 @@ public class GitHubRepository {
 
                         // here we get again from DB as we obey the "single source of truth" approach
                         RepoContainer finalRepoContainerFromDB = DBHelper.getRepoContainerOfPage(page);
-                        emitter.onSuccess(finalRepoContainerFromDB.getRepoList());
+                        emitter.onSuccess(Objects.requireNonNull(finalRepoContainerFromDB).getRepoList());
 
                     } else {
 
@@ -105,7 +106,7 @@ public class GitHubRepository {
                     // here we get again from DB as we obey the "single source of truth" approach
                     pullListFromDB = DBHelper.getPullListForRepo(mCreatorString, mRepositoryString);
                     if (pullListFromDB == null) {
-                        pullListFromDB = new ArrayList<Pull>();
+                        pullListFromDB = new ArrayList<>();
                     }
                     emitter.onSuccess(pullListFromDB);
 

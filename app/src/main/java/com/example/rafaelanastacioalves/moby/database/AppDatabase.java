@@ -7,5 +7,5 @@ public class AppDatabase {
 
     public static final String NAME = "AppDatabase";
 
-    public static final int VERSION = 1;
+    private static final int VERSION = 1;
 }

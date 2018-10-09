@@ -15,7 +15,7 @@ import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBHelper {
+class DBHelper {
     public static RepoContainer getRepoContainerOfPage(String i) {
         List<Repo> listRepo = SQLite.select()
                 .from(Repo.class)
@@ -23,7 +23,7 @@ public class DBHelper {
                 .queryList();
 
 
-        if (listRepo == null || listRepo.isEmpty()) {
+        if (listRepo.isEmpty()) {
             return null;
         }
 
@@ -32,15 +32,12 @@ public class DBHelper {
     }
 
     public static void setRepoContainerOfPage(String page, RepoContainer container) {
-        FlowManager.getDatabase(AppDatabase.class).executeTransaction(new ITransaction() {
-            @Override
-            public void execute(DatabaseWrapper databaseWrapper) {
-                List<Repo> listRepo = container.getRepoList();
+        FlowManager.getDatabase(AppDatabase.class).executeTransaction(databaseWrapper -> {
+            List<Repo> listRepo = container.getRepoList();
 
-                for (Repo repo : listRepo) {
-                    repo.setPage(page);
-                    repo.save();
-                }
+            for (Repo repo : listRepo) {
+                repo.setPage(page);
+                repo.save();
             }
         });
     }

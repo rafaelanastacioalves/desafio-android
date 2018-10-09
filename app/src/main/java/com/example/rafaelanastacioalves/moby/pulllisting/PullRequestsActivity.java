@@ -30,7 +30,6 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
 
     public static final String ARG_CREATOR = "creator_arg";
     public static final String ARG_REPOSITORY = "repository_arg";
-    public static String ARG_PACKAGE_ID;
     private final RecyclerViewClickListener clickListener = this;
     @BindView(R.id.pulls_list_recycler_view)
     RecyclerView mPullsListRecyclerView;
@@ -86,12 +85,7 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
 
     private void subscribe() {
         mLiveDataEntityDetailsViewModel = ViewModelProviders.of(this).get(LiveDataEntityDetailsViewModel.class);
-        mLiveDataEntityDetailsViewModel.getEntityDetails().observe(this, new Observer<ArrayList<Pull>>() {
-            @Override
-            public void onChanged(@Nullable ArrayList<Pull> pull) {
-                setViewsWith(pull);
-            }
-        });
+        mLiveDataEntityDetailsViewModel.getEntityDetails().observe(this, pull -> setViewsWith(pull));
 
     }
 

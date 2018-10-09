@@ -1,6 +1,7 @@
 package com.example.rafaelanastacioalves.moby.repolisting;
 
 import android.arch.paging.PagedListAdapter;
+import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class RepoListAdapter extends PagedListAdapter<Repo, RepoViewHolder> {
     private RecyclerViewClickListener recyclerViewClickListener;
 
 
-    protected RepoListAdapter() {
+    RepoListAdapter() {
         super(DIFF_CALLBACK);
     }
 
@@ -35,6 +36,7 @@ public class RepoListAdapter extends PagedListAdapter<Repo, RepoViewHolder> {
         this.recyclerViewClickListener = aRVC;
     }
 
+    @NonNull
     @Override
     public RepoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new RepoViewHolder(LayoutInflater.from(parent.getContext())

@@ -16,7 +16,6 @@ import android.view.View;
 import com.example.rafaelanastacioalves.moby.R;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsActivity;
-import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsFragment;
 import com.example.rafaelanastacioalves.moby.vo.Repo;
 
 import timber.log.Timber;
@@ -24,8 +23,6 @@ import timber.log.Timber;
 public class RepoListingActivity extends AppCompatActivity implements RecyclerViewClickListener {
     private final RecyclerViewClickListener mClickListener = this;
     private RepoListAdapter mRepoListAdapter;
-    private RecyclerView mRecyclerView;
-    private LiveDataRepoListViewModel mLiveDataRepoListViewModel;
 
     @Nullable
     private SimpleIdlingResource mIdlingResource;
@@ -40,7 +37,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
 
 
     private void subscribe() {
-        mLiveDataRepoListViewModel = ViewModelProviders.of(this).get(LiveDataRepoListViewModel.class);
+        LiveDataRepoListViewModel mLiveDataRepoListViewModel = ViewModelProviders.of(this).get(LiveDataRepoListViewModel.class);
 
         mLiveDataRepoListViewModel.getMainEntityList().observe(this, mainEntities -> {
             Timber.d("On Changed");
@@ -56,9 +53,8 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     }
 
     private void tellTestingLoadIsDone(boolean b) {
-        if (getIdlingResource() != null) {
-            mIdlingResource.setIdleState(b);
-        }
+        getIdlingResource();
+        mIdlingResource.setIdleState(b);
     }
 
     private void setupViews() {
@@ -68,7 +64,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     }
 
     private void setupRecyclerView() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.repo_list);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.repo_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
         if (mRepoListAdapter == null) {
@@ -89,8 +85,8 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     public void onClick(View view, int position) {
         Repo repo = mRepoListAdapter.getCurrentList().get(position);
         Intent i = new Intent(this, PullRequestsActivity.class);
-        i.putExtra(PullRequestsFragment.ARG_CREATOR, repo.getOwner().getLogin());
-        i.putExtra(PullRequestsFragment.ARG_REPOSITORY, repo.getName());
+        i.putExtra(PullRequestsActivity.ARG_CREATOR, repo.getOwner().getLogin());
+        i.putExtra(PullRequestsActivity.ARG_REPOSITORY, repo.getName());
         startActivity(i);
     }
 
@@ -100,7 +96,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
 
     @VisibleForTesting
     @NonNull
-    public IdlingResource getIdlingResource() {
+    private IdlingResource getIdlingResource() {
         if (mIdlingResource == null) {
             mIdlingResource = new SimpleIdlingResource();
         }
