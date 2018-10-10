@@ -10,7 +10,6 @@ import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -32,7 +31,7 @@ public class PagedRepoDataSource extends PageKeyedDataSource<String, Repo> {
         loadStatus.postValue(Boolean.TRUE);
         GitHubRepository repository = new GitHubRepository();
         Single<List<Repo>> observable = repository.getRepoList(String.valueOf(1), gitRepoLanguage, gitSortParam);
-        Disposable disposable = observable.subscribeOn(Schedulers.computation())
+        observable.subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repoList -> {
                             loadStatus.setValue(Boolean.FALSE);
@@ -61,7 +60,7 @@ public class PagedRepoDataSource extends PageKeyedDataSource<String, Repo> {
         loadStatus.postValue(Boolean.TRUE);
         GitHubRepository repository = new GitHubRepository();
         Single<List<Repo>> observable = repository.getRepoList(String.valueOf(params.key), gitRepoLanguage, gitSortParam);
-        Disposable disposable = observable.subscribeOn(Schedulers.computation())
+        observable.subscribeOn(Schedulers.computation())
 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repoList -> {
@@ -75,6 +74,7 @@ public class PagedRepoDataSource extends PageKeyedDataSource<String, Repo> {
 
                 );
     }
+
 
 
 }

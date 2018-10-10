@@ -1,11 +1,9 @@
 package com.example.rafaelanastacioalves.moby.pulllisting;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,8 +19,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
-
-import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 
 public class PullRequestsActivity extends AppCompatActivity implements RecyclerViewClickListener {
@@ -57,14 +53,14 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mPullsListRecyclerView.setLayoutManager(layoutManager);
         if (mPullsListAdapter == null) {
-            mPullsListAdapter = new PullsListAdapter(getContext());
+            mPullsListAdapter = new PullsListAdapter();
         }
         mPullsListAdapter.setRecyclerViewClickListener(clickListener);
         mPullsListRecyclerView.setAdapter(mPullsListAdapter);
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
     }
@@ -85,7 +81,7 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
 
     private void subscribe() {
         mLiveDataEntityDetailsViewModel = ViewModelProviders.of(this).get(LiveDataEntityDetailsViewModel.class);
-        mLiveDataEntityDetailsViewModel.getEntityDetails().observe(this, pull -> setViewsWith(pull));
+        mLiveDataEntityDetailsViewModel.getEntityDetails().observe(this, this::setViewsWith);
 
     }
 

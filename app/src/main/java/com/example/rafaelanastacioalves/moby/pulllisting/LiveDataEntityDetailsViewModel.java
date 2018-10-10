@@ -30,7 +30,7 @@ class LiveDataEntityDetailsViewModel extends ViewModel {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mPullList::setValue,
-                        throwable -> throwable.printStackTrace());
+                        Throwable::printStackTrace);
 
     }
 

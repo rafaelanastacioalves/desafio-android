@@ -11,13 +11,13 @@ import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener
 import com.example.rafaelanastacioalves.moby.vo.Repo;
 
 
-public class RepoListAdapter extends PagedListAdapter<Repo, RepoViewHolder> {
+class RepoListAdapter extends PagedListAdapter<Repo, RepoViewHolder> {
     private static final DiffUtil.ItemCallback<Repo> DIFF_CALLBACK = new DiffUtil.ItemCallback<Repo>() {
         @Override
         public boolean areItemsTheSame(Repo oldItem, Repo newItem) {
 
             // a simple comparision suffices here
-            return oldItem.getName() == newItem.getName() && oldItem.getOwner() == newItem.getOwner();
+            return oldItem.getName().equals(newItem.getName()) && oldItem.getOwner() == newItem.getOwner();
         }
 
         @Override
@@ -38,15 +38,15 @@ public class RepoListAdapter extends PagedListAdapter<Repo, RepoViewHolder> {
 
     @NonNull
     @Override
-    public RepoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RepoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new RepoViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.repo_viewholder, parent, false), recyclerViewClickListener);
     }
 
     @Override
-    public void onBindViewHolder(RepoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RepoViewHolder holder, int position) {
         Repo aRepoW = getItem(position);
-        ((RepoViewHolder) holder).bind(aRepoW);
+        holder.bind(aRepoW);
     }
 
 }

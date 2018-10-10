@@ -55,7 +55,7 @@ public class GitHubRepository {
 
                         //we emmit 4xx and 5xx error messages
                         try {
-                            String errorString = response.errorBody().string();
+                            String errorString = Objects.requireNonNull(response.errorBody()).string();
                             emitter.onError(new Exception(errorString));
                         } catch (IOException e) {
                             emitter.onError(e.getCause());
@@ -101,7 +101,7 @@ public class GitHubRepository {
                 Response<ArrayList<Pull>> response = retrofitCall.execute();
                 if (response.isSuccessful()) {
                     ArrayList<Pull> pullList = response.body();
-                    DBHelper.setPullListForRepo(mCreatorString, mRepositoryString, pullList);
+                    DBHelper.setPullListForRepo(mCreatorString, mRepositoryString, Objects.requireNonNull(pullList));
 
                     // here we get again from DB as we obey the "single source of truth" approach
                     pullListFromDB = DBHelper.getPullListForRepo(mCreatorString, mRepositoryString);
@@ -113,7 +113,7 @@ public class GitHubRepository {
                 } else {
 
                     //we emmit 4xx and 5xx error messages
-                    emitter.onError(new Throwable(response.errorBody().string()));
+                    emitter.onError(new Throwable(Objects.requireNonNull(response.errorBody()).string()));
                 }
             } catch (IOException e) {
 

@@ -4,10 +4,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.arch.paging.PagedList;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +15,8 @@ import com.example.rafaelanastacioalves.moby.R;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsActivity;
 import com.example.rafaelanastacioalves.moby.vo.Repo;
+
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -54,7 +54,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
 
     private void tellTestingLoadIsDone(boolean b) {
         getIdlingResource();
-        mIdlingResource.setIdleState(b);
+        Objects.requireNonNull(mIdlingResource).setIdleState(b);
     }
 
     private void setupViews() {
@@ -64,7 +64,7 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
     }
 
     private void setupRecyclerView() {
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.repo_list);
+        RecyclerView mRecyclerView = findViewById(R.id.repo_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
         if (mRepoListAdapter == null) {
@@ -83,23 +83,17 @@ public class RepoListingActivity extends AppCompatActivity implements RecyclerVi
 
     @Override
     public void onClick(View view, int position) {
-        Repo repo = mRepoListAdapter.getCurrentList().get(position);
+        Repo repo = Objects.requireNonNull(mRepoListAdapter.getCurrentList()).get(position);
         Intent i = new Intent(this, PullRequestsActivity.class);
-        i.putExtra(PullRequestsActivity.ARG_CREATOR, repo.getOwner().getLogin());
+        i.putExtra(PullRequestsActivity.ARG_CREATOR, Objects.requireNonNull(repo).getOwner().getLogin());
         i.putExtra(PullRequestsActivity.ARG_REPOSITORY, repo.getName());
         startActivity(i);
     }
 
-    public RepoListAdapter getAdapter() {
-        return mRepoListAdapter;
-    }
-
     @VisibleForTesting
-    @NonNull
-    private IdlingResource getIdlingResource() {
+    private void getIdlingResource() {
         if (mIdlingResource == null) {
             mIdlingResource = new SimpleIdlingResource();
         }
-        return mIdlingResource;
     }
 }

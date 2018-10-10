@@ -9,8 +9,6 @@ import com.example.rafaelanastacioalves.moby.vo.Repo_Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
-import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +63,7 @@ class DBHelper {
                 .orderBy(OrderBy.fromProperty(Pull_Table.order).ascending())
                 .queryList();
 
-        if (listPull == null || listPull.isEmpty()) {
+        if (listPull.isEmpty()) {
             return null;
         }
 

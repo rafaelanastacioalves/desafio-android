@@ -3,11 +3,7 @@ package com.example.rafaelanastacioalves.moby.vo;
 import java.util.List;
 
 public class RepoContainer {
-    private List<Repo> items;
-
-    public RepoContainer() {
-        super();
-    }
+    private final List<Repo> items;
 
     public RepoContainer(List<Repo> listRepo) {
         this.items = listRepo;

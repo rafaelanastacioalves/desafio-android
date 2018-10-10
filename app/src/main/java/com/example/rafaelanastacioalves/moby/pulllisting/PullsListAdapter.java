@@ -1,6 +1,5 @@
 package com.example.rafaelanastacioalves.moby.pulllisting;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,12 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
-    private final Context mContext;
     private RecyclerViewClickListener recyclerViewClickListener;
     private List<Pull> items = new ArrayList<>();
 
-    public PullsListAdapter(Context context) {
-        mContext = context;
+    public PullsListAdapter() {
     }
 
     private List<Pull> getItems() {
@@ -37,13 +34,13 @@ class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
 
     @NonNull
     @Override
-    public PullViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PullViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new PullViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pull_viewholder, parent, false), recyclerViewClickListener);
     }
 
     @Override
-    public void onBindViewHolder(PullViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PullViewHolder holder, int position) {
         Pull aPull = getItems().get(position);
         (holder).bind(aPull);
     }
