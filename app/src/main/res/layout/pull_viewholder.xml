@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_material_light"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pull_container"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="PrivateResource">
@@ -77,7 +77,6 @@
         app:layout_constraintTop_toBottomOf="@+id/pull_text_view_description" />
 
     <include
-        android:id="@+id/include"
         layout="@layout/view_divider_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
