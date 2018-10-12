@@ -24,6 +24,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
+    private static Retrofit retrofit;
+
     public static <S> S createService(Class<S> serviceClass) {
 
 
@@ -46,7 +48,10 @@ public class ServiceGenerator {
     }
 
     private static Retrofit mountRetrofit(Retrofit.Builder builder, OkHttpClient httpClient) {
-        return builder.client(httpClient).build();
+        if (retrofit == null ) {
+            retrofit = builder.client(httpClient).build();
+        }
+        return retrofit;
     }
 
 
