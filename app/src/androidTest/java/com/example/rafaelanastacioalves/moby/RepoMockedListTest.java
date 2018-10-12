@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.concurrent.TimeoutException;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -41,9 +40,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.rafaelanastacioalves.moby.util.RestServiceTestHelper.withHolderTitleView;
 import static com.example.rafaelanastacioalves.moby.util.RestServiceTestHelper.withRecyclerView;
-import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 
 /**
@@ -53,9 +50,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
 public class RepoMockedListTest {
-    private String fileNameRepoListOKRespone = "repo_list_ok_response.json";
-    private String fileNameRepoListOKPage2Respone = "repo_list_ok_page_2_response.json";
-    private String fileNamePullsListOKRespone = "pulls_list_ok_response.json";
+    private final String fileNameRepoListOKRespone = "repo_list_ok_response.json";
 
     @Rule
     public ActivityTestRule<RepoListingActivity> mRepoListTestRule = new ActivityTestRule(RepoListingActivity.class, true, false);
@@ -78,7 +73,7 @@ public class RepoMockedListTest {
 
 
     @Test
-    public void JSONValuesFulfill() throws IOException, TimeoutException, InterruptedException {
+    public void JSONValuesFulfill() throws IOException {
         server.enqueue(new MockResponse()
                 .setResponseCode(HttpURLConnection.HTTP_OK)
                 .setBody(RestServiceTestHelper.getStringFromFile(
@@ -110,6 +105,7 @@ public class RepoMockedListTest {
                 )
         );
 
+        String fileNamePullsListOKRespone = "pulls_list_ok_response.json";
         server.enqueue(new MockResponse()
                 .setResponseCode(HttpURLConnection.HTTP_OK)
                 .setBody(RestServiceTestHelper.getStringFromFile(
@@ -124,12 +120,12 @@ public class RepoMockedListTest {
 
         onView(allOf(withId(R.id.repo_linear_layout_container), withContentDescription("elasticsearch")))
                 .perform(click());
-        onView(withId(R.id.pull_list_fragment)).check(matches(isDisplayed()));
+        onView(withId(R.id.pulls_list_recycler_view)).check(matches(isDisplayed()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Test
-    public void paginationTest() throws IOException, InterruptedException {
+    public void paginationTest() throws IOException {
         Timber.i("paginationTest");
         boolean initialListEmpty = true;
 
@@ -143,6 +139,7 @@ public class RepoMockedListTest {
                 )
         );
 
+        String fileNameRepoListOKPage2Respone = "repo_list_ok_page_2_response.json";
         server.enqueue(new MockResponse()
                 .setResponseCode(HttpURLConnection.HTTP_OK)
                 .setBody(RestServiceTestHelper.getStringFromFile(

@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 
 import static android.arch.lifecycle.Transformations.switchMap;
 
-class LiveDataRepoListViewModel extends ViewModel {
+public class LiveDataRepoListViewModel extends ViewModel {
 
     private LiveData<Boolean> mIsLoading;
     private final LiveData<PagedList<Repo>> mMainEntityPagedList = setupPagedList();

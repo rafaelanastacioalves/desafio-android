@@ -15,6 +15,7 @@ import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener
 import com.example.rafaelanastacioalves.moby.vo.Pull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,9 +66,11 @@ public class PullRequestsActivity extends AppCompatActivity implements RecyclerV
 
     }
 
+
+
     @Override
     public void onClick(View view, int position) {
-        Pull aPull = (Pull) view.getTag();
+        Pull aPull = Objects.requireNonNull(mPullsListAdapter.getCurrentList()).get(position);
         Timber.i("Url: " + Uri.parse(aPull.getPullUrl()));
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(aPull.getPullUrl()));
         startActivity(browserIntent);

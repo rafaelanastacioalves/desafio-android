@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-class LiveDataEntityDetailsViewModel extends ViewModel {
+public class LiveDataEntityDetailsViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Pull>> mPullList = new MutableLiveData<>();
 

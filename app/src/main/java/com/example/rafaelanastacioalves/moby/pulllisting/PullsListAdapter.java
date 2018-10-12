@@ -54,4 +54,8 @@ class PullsListAdapter extends RecyclerView.Adapter<PullViewHolder> {
             return 0;
         }
     }
+
+    public List<Pull> getCurrentList(){
+        return items;
+    }
 }

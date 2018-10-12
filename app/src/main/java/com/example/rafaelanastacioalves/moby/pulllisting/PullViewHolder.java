@@ -56,7 +56,6 @@ class PullViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
                 .placeholder(R.drawable.placeholder_user)
                 .into(circularImageView);
 
-        pullLinearLayoutContainer.setTag(aPull);
 
     }
 

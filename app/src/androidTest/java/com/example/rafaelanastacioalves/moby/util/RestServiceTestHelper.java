@@ -50,7 +50,7 @@ public class RestServiceTestHelper {
 
             @Override
             protected boolean matchesSafely(RepoViewHolder item) {
-                TextView timeViewText = (TextView) item.itemView.findViewById(R.id.repo_text_view_title);
+                TextView timeViewText = item.itemView.findViewById(R.id.repo_text_view_title);
                 if (timeViewText == null) {
                     return false;
                 }

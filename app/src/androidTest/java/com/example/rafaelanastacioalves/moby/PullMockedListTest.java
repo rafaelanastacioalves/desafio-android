@@ -10,7 +10,6 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.example.rafaelanastacioalves.moby.database.AppDatabase;
 import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsActivity;
-import com.example.rafaelanastacioalves.moby.pulllisting.PullRequestsFragment;
 import com.example.rafaelanastacioalves.moby.util.RestServiceTestHelper;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -48,10 +47,10 @@ import static org.hamcrest.core.AnyOf.anyOf;
 
 @RunWith(AndroidJUnit4.class)
 public class PullMockedListTest {
-    private String fileNamePullsListOKRespone = "pulls_list_ok_response.json";
+    private final String fileNamePullsListOKRespone = "pulls_list_ok_response.json";
 
     @Rule
-    public ActivityTestRule<PullRequestsActivity> mRepoListTestRule = new ActivityTestRule<PullRequestsActivity>(PullRequestsActivity.class, true, false);
+    public ActivityTestRule<PullRequestsActivity> mRepoListTestRule = new ActivityTestRule(PullRequestsActivity.class, true, false);
 
     private MockWebServer server;
 
@@ -83,8 +82,8 @@ public class PullMockedListTest {
 
 
         Intent intent = new Intent();
-        intent.putExtra(PullRequestsFragment.ARG_CREATOR, "elastic");
-        intent.putExtra(PullRequestsFragment.ARG_REPOSITORY, "elasticsearch");
+        intent.putExtra(PullRequestsActivity.ARG_CREATOR, "elastic");
+        intent.putExtra(PullRequestsActivity.ARG_REPOSITORY, "elasticsearch");
         mRepoListTestRule.launchActivity(intent);
         try {
             Thread.sleep(3000);
@@ -100,6 +99,7 @@ public class PullMockedListTest {
 
     }
 
+
     @Test
     public void clickTest() throws IOException {
         Timber.i("ClickTest");
@@ -113,8 +113,8 @@ public class PullMockedListTest {
         );
 
         Intent intent = new Intent();
-        intent.putExtra(PullRequestsFragment.ARG_CREATOR, "elastic");
-        intent.putExtra(PullRequestsFragment.ARG_REPOSITORY, "elasticsearch");
+        intent.putExtra(PullRequestsActivity.ARG_CREATOR, "elastic");
+        intent.putExtra(PullRequestsActivity.ARG_REPOSITORY, "elasticsearch");
         mRepoListTestRule.launchActivity(intent);
         try {
             Thread.sleep(3000);
