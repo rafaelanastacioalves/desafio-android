@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rafaelanastacioalves.moby.R;
+import com.example.rafaelanastacioalves.moby.common.CircleImageTransformation;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
 import com.example.rafaelanastacioalves.moby.vo.Repo;
 import com.squareup.picasso.Picasso;
@@ -64,6 +65,7 @@ public class RepoViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 .load(aRepo.getOwner().getAvatarUrl())
                 .resize(150, 150)
                 .centerInside()
+                .transform(new CircleImageTransformation())
                 .placeholder(R.drawable.placeholder_user)
                 .into(reopOwnerImageView);
         reopOwnerImageView.setContentDescription(aRepo.getName());

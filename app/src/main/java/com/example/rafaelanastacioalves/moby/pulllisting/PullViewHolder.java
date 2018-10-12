@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rafaelanastacioalves.moby.R;
+import com.example.rafaelanastacioalves.moby.common.CircleImageTransformation;
 import com.example.rafaelanastacioalves.moby.listeners.RecyclerViewClickListener;
 import com.example.rafaelanastacioalves.moby.vo.Pull;
 import com.squareup.picasso.Picasso;
@@ -51,6 +52,7 @@ class PullViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
                 .load(aPull.getPullUser().getAvatarUrl())
                 .resize(150, 150)
                 .centerInside()
+                .transform(new CircleImageTransformation())
                 .placeholder(R.drawable.placeholder_user)
                 .into(circularImageView);
 

@@ -110,7 +110,7 @@
         app:layout_constraintTop_toTopOf="@+id/repo_textview_number_forks"
         tools:text="100" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/repo_owner_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"

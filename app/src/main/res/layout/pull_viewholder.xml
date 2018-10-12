@@ -46,7 +46,7 @@
         tools:ignore="InefficientWeight"
         tools:text="@string/fake_description_text" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/pull_textview_owner_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
